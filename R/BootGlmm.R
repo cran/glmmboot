@@ -26,6 +26,12 @@
 #'   but start very small to make sure it works on
 #'   your data properly, and to get a rough timing estimate etc.
 #'
+#' @param base_data
+#'   Default NULL; In a future version this will become mandatory to supply.
+#'   In some cases, it can be extracted
+#'   from the base_model, but this can produce bugs. It's recommended that
+#'   you supply your data.
+#'
 #' @param return_coefs_instead
 #'   Logical, default FALSE: do you want the list of lists
 #'   of results for each bootstrap sample (set to TRUE), or the
@@ -44,11 +50,6 @@
 #'   random effects, set resample_specific_blocks to any
 #'   non-null value that does not contain any random effect
 #'   variable names.
-#'
-#' @param base_data
-#'   Default NULL; only needed if it can't be extracted
-#'   from the base_model, either because it's been stripped from the
-#'   model, or the calls ($model, $frame, @frame) don't work.
 #'
 #' @param unique_resample_lim
 #'   Should be same length as number of random effects (or left NULL).
@@ -94,25 +95,26 @@
 #' @examples
 #' x <- rnorm(20)
 #' y <- rnorm(20) + x
-#' first_model <- lm(y ~ x)
+#' xy_data = data.frame(x = x, y = y)
+#' first_model <- lm(y ~ x, data = xy_data)
 #'
-#' out_matrix <- BootGlmm(first_model, 20)
-#' out_list <- BootGlmm(first_model, 20, return_coefs_instead = TRUE)
+#' out_matrix <- BootGlmm(first_model, 20, base_data = xy_data)
+#' out_list <- BootGlmm(first_model, 20, base_data = xy_data, return_coefs_instead = TRUE)
 #'
 #' \donttest{
 #'   data(test_data)
 #'   library(glmmTMB)
 #'   test_formula <- as.formula('y ~ x_var1 + x_var2 + x_var3 + (1|subj)')
 #'   test_model <- glmmTMB(test_formula, data = test_data, family = binomial)
-#'   output_matrix <- BootGlmm(test_model, 199)
+#'   output_matrix <- BootGlmm(test_model, 199, base_data = test_data)
 #'
-#'   output_lists <- BootGlmm(test_model, 199, return_coefs_instead = TRUE)
+#'   output_lists <- BootGlmm(test_model, 199, base_data = test_data, return_coefs_instead = TRUE)
 #' }
 BootGlmm <- function(base_model,
                      resamples = 9999,
+                     base_data = NULL,
                      return_coefs_instead = FALSE,
                      resample_specific_blocks = NULL,
-                     base_data = NULL,
                      unique_resample_lim = NULL,
                      num_cores = DetectCores() - 1,
                      suppress_sampling_message = FALSE,
@@ -145,6 +147,7 @@ BootGlmm <- function(base_model,
         } else {
             stop('Other dataframe extraction methods not implemented, please file an issue, or supply data as base_data to this function')
         }
+        warning('Please supply data through the argument base_data; automatic reading from your model can produce unforeseeable bugs. In a future version, explicit data passing will become mandatory.')
     }
 
     ## deciding on random blocks. Subset of rand_cols:

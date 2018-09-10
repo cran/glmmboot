@@ -12,7 +12,7 @@
 
 <meta name="author" content="Colman Humphrey" />
 
-<meta name="date" content="2018-05-22" />
+<meta name="date" content="2018-09-03" />
 
 <title>Quick Usage Guide</title>
 
@@ -280,14 +280,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Quick Usage Guide</h1>
 <h4 class="author"><em>Colman Humphrey</em></h4>
-<h4 class="date"><em>2018-05-22</em></h4>
+<h4 class="date"><em>2018-09-03</em></h4>
 
 
 
 <p>For even quicker usage instructions, see the readme.</p>
 <p>The general idea of this package is that you can throw nearly any model built in the typical R fashion. For now, we just need a somewhat standard way of extracting fixed effects, and that <code>update</code> works, which is nearly always the case.</p>
 <p>If your model is called <code>base_model</code> for example, then if <code>coef(summary(base_model))</code> or <code>coef(summary(base_model))$cond</code> gives the estimates and standard errors, the method will work.</p>
-<p>Further, if the dataframe that creates the model is accessible from <code>base_model$model</code>, <code>base_model$frame</code> or <code>base_model@frame</code>, you won’t have to send the data in to the function separately.</p>
+<p>The data should be supplied manually, although it’s currently the case that if the dataframe that creates the model is accessible from <code>base_model$model</code>, <code>base_model$frame</code> or <code>base_model@frame</code>, you won’t have to send the data in to the function separately. Be careful here - some models supply this but the method introduces bugs. Much safer to supply the data explicitly.</p>
 <p>Let’s work through an example with <code>glmmTMB</code>. We’ll use the data that comes with <code>glmmboot</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(glmmboot)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">data</span>(test_data)</a>
@@ -314,57 +314,61 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Now we’ll use the bootstrap. By default it’ll perform block bootstrapping over the highest entropy random effect - but there’s only one, so of course the winner is <code>subj</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">bootstrap_over_subj &lt;-<span class="st"> </span><span class="kw">BootGlmm</span>(<span class="dt">base_model =</span> base_run,</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">                                <span class="dt">resamples =</span> <span class="dv">99</span>, </a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">                                <span class="dt">num_cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Performing block resampling, over subj</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-3" data-line-number="3">                                <span class="dt">base_data =</span> test_data,</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">                                <span class="dt">num_cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Performing block resampling, over subj</span></a></code></pre></div>
 <p>For publications etc, better to run about ten thousand resamples to avoid noise having much of an effect. Of course 99 is far too small, only for an example.</p>
 <p>And comparing results:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">print</span>(bootstrap_over_subj)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt;              estimate boot 2.5% boot 97.5%  boot p_value base p_value</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; (Intercept) 0.6018968   -0.1127     1.1775          0.08       0.1636</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; x_var1      0.1909343   -0.1090     0.5530          0.22       0.2338</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; x_var2      0.3140507   -0.0115     0.5474          0.04       0.0396</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; (Intercept) 0.6018968   -0.1819     1.1976          0.12       0.1636</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; x_var1      0.1909343   -0.1671     0.5218          0.24       0.2338</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; x_var2      0.3140507    0.0610     0.5598          0.04       0.0396</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;             base 2.5% base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; (Intercept)   -0.2449     1.4487       0.7618079</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; x_var1        -0.1234     0.5052       1.0531884</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; x_var2         0.0150     0.6131       0.9345862</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; (Intercept)   -0.2449     1.4487       0.8145246</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; x_var1        -0.1234     0.5052       1.0959836</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; x_var2         0.0150     0.6131       0.8340407</span></a></code></pre></div>
 <p>This of course might take a long time. If it takes far too long on your machine, you can ideally run it on a bunch of computers. We don’t want each computer to output the fully processed output, only the intermediate outcome. To do this, we set <code>return_coefs_instead = TRUE</code> for each run:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">b_list1 &lt;-<span class="st"> </span><span class="kw">BootGlmm</span>(<span class="dt">base_model =</span> base_run,</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">                    <span class="dt">resamples =</span> <span class="dv">29</span>, </a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">                    <span class="dt">num_cores =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">                    <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; Performing block resampling, over subj</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">b_list2 &lt;-<span class="st"> </span><span class="kw">BootGlmm</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">                    <span class="dt">resamples =</span> <span class="dv">30</span>, </a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">                    <span class="dt">num_cores =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">                    <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; Performing block resampling, over subj</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">b_list3 &lt;-<span class="st"> </span><span class="kw">BootGlmm</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">                    <span class="dt">resamples =</span> <span class="dv">30</span>, </a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">                    <span class="dt">num_cores =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">                    <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; Performing block resampling, over subj</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                    <span class="dt">base_data =</span> test_data,</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">                    <span class="dt">num_cores =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">                    <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; Performing block resampling, over subj</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">b_list2 &lt;-<span class="st"> </span><span class="kw">BootGlmm</span>(<span class="dt">base_model =</span> base_run,</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">                    <span class="dt">resamples =</span> <span class="dv">30</span>, </a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">                    <span class="dt">base_data =</span> test_data,</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">                    <span class="dt">num_cores =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">                    <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; Performing block resampling, over subj</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">b_list3 &lt;-<span class="st"> </span><span class="kw">BootGlmm</span>(<span class="dt">base_model =</span> base_run,</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">                    <span class="dt">resamples =</span> <span class="dv">30</span>, </a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">                    <span class="dt">base_data =</span> test_data,</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">                    <span class="dt">num_cores =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">                    <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; Performing block resampling, over subj</span></a></code></pre></div>
 <p>Combining this is simple enough. If we’ve used a few, we don’t want to mess around with even more lists, so we can enter them into the relevant function:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">CombineResampledLists</span>(b_list1, b_list2, b_list3)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;              estimate boot 2.5% boot 97.5%  boot p_value base p_value</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; (Intercept) 0.6018968   -0.3176     1.1290        0.1111       0.1636</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; x_var1      0.1909343   -0.1280     0.5291        0.3111       0.2338</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; x_var2      0.3140507    0.0377     0.5477        0.0111       0.0396</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; (Intercept) 0.6018968   -0.2809     1.1633        0.1333       0.1636</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; x_var1      0.1909343   -0.0894     0.5116        0.1778       0.2338</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; x_var2      0.3140507    0.0852     0.5072        0.0222       0.0396</span></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;             base 2.5% base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; (Intercept)   -0.2449     1.4487       0.8541546</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; x_var1        -0.1234     0.5052       1.0452793</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; x_var2         0.0150     0.6131       0.8526831</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; (Intercept)   -0.2449     1.4487       0.8527015</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; x_var1        -0.1234     0.5052       0.9561965</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; x_var2         0.0150     0.6131       0.7056819</span></a></code></pre></div>
 <p>If we’ve run a huge number of such runs, ideally we’ll combine all output to a list of lists, like so:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">list_of_lists_output &lt;-<span class="st"> </span><span class="kw">list</span>(b_list1, b_list2, b_list3)</a></code></pre></div>
 <p>And we’ll get the same result:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">CombineResampledLists</span>(list_of_lists_output)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt;              estimate boot 2.5% boot 97.5%  boot p_value base p_value</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; (Intercept) 0.6018968   -0.3176     1.1290        0.1111       0.1636</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; x_var1      0.1909343   -0.1280     0.5291        0.3111       0.2338</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; x_var2      0.3140507    0.0377     0.5477        0.0111       0.0396</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; (Intercept) 0.6018968   -0.2809     1.1633        0.1333       0.1636</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; x_var1      0.1909343   -0.0894     0.5116        0.1778       0.2338</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; x_var2      0.3140507    0.0852     0.5072        0.0222       0.0396</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;             base 2.5% base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; (Intercept)   -0.2449     1.4487       0.8541546</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; x_var1        -0.1234     0.5052       1.0452793</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; x_var2         0.0150     0.6131       0.8526831</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; (Intercept)   -0.2449     1.4487       0.8527015</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; x_var1        -0.1234     0.5052       0.9561965</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; x_var2         0.0150     0.6131       0.7056819</span></a></code></pre></div>
 <!---
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
 

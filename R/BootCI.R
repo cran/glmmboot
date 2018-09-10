@@ -42,16 +42,18 @@
 #' @examples
 #' x <- rnorm(20)
 #' y <- rnorm(20) + x
-#' first_model <- lm(y ~ x)
-#' out_list <- BootGlmm(first_model, 20, return_coefs_instead = TRUE)
+#' xy_data = data.frame(x = x, y = y)
+#' first_model <- lm(y ~ x, data = xy_data)
+#' out_list <- BootGlmm(first_model, 20, base_data = xy_data, return_coefs_instead = TRUE)
 #' BootCI(out_list$base_coef_se,
 #'        out_list$resampled_coef_se)
 #'
 #' \donttest{
 #'   data(test_data)
 #'   library(glmmTMB)
-#'   test_model <- glmmTMB(y ~ x + (1 | some_RE), data = test_data, family = binomial)
-#'   output_lists <- BootGlmm(test_model, 199, return_coefs_instead = TRUE)
+#'   ## where subj is some random effect
+#'   test_model <- glmmTMB(y ~ x_var1 + (1 | subj), data = test_data, family = binomial)
+#'   output_lists <- BootGlmm(test_model, 199, base_data = test_data, return_coefs_instead = TRUE)
 #'   BootCI(output_lists$base_coef_se,
 #'          output_lists$resampled_coef_se)
 #' }
@@ -101,10 +103,14 @@ BootCI <- function(base_coef_se = NULL,
 
         result <- base_est - t_boot * base_se
 
-        ## p val...
+        ## p val:
         p_t = base_est / base_se
-        ## p_val = mean(abs((rep_ests - base_est) / rep_ses) >=  abs(p_t))
-        p_val_num = sum(abs((rep_ests - base_est) / rep_ses) >=  abs(p_t)) + 1
+
+        p_val_num_left = sum((rep_ests - base_est) / rep_ses <=  p_t) + 1
+        p_val_num_right = sum((rep_ests - base_est) / rep_ses >=  p_t) + 1
+
+        p_val_num = 2 * min(p_val_num_left, p_val_num_right)
+
         p_val = p_val_num / (length(rep_ests) + 1)
 
         conf_ind[var,] = c(result, p_val)
@@ -160,10 +166,11 @@ BootCI <- function(base_coef_se = NULL,
 #' \donttest{
 #'   data(test_data)
 #'   library(glmmTMB)
-#'   test_model <- glmmTMB(y ~ x + (1 | some_RE), data = test_data, family = binomial)
-#'   output_list1 <- BootGlmm(test_model, 99, return_coefs_instead = TRUE)
-#'   output_list2 <- BootGlmm(test_model, 100, return_coefs_instead = TRUE)
-#'   output_list3 <- BootGlmm(test_model, 100, return_coefs_instead = TRUE)
+#'   ## where subj is some RE
+#'   test_model <- glmmTMB(y ~ x_var1 + (1 | subj), data = test_data, family = binomial)
+#'   output_list1 <- BootGlmm(test_model, 99, base_data = test_data, return_coefs_instead = TRUE)
+#'   output_list2 <- BootGlmm(test_model, 100, base_data = test_data, return_coefs_instead = TRUE)
+#'   output_list3 <- BootGlmm(test_model, 100, base_data = test_data, return_coefs_instead = TRUE)
 #'   CombineResampledLists(output_list1, output_list2, output_list3)
 #'
 #'   num_blocks = 10
@@ -177,8 +184,9 @@ BootCI <- function(base_coef_se = NULL,
 #'       }
 #'       reg_list[[i]] = BootGlmm(test_model,
 #'                                resamples = block_resamples,
+#'                                base_data = test_data,
 #'                                return_coefs_instead = TRUE,
-#'                                num_cores = 4,
+#'                                num_cores = 1, ## increase for parallel
 #'                                suppress_loading_bar = TRUE)
 #'   }
 #'   boot_ci1 <- CombineResampledLists(reg_list)

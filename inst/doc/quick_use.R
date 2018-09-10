@@ -23,6 +23,7 @@ base_run <- glmmTMB(formula = model_formula,
 ## ---- cache=TRUE---------------------------------------------------------
 bootstrap_over_subj <- BootGlmm(base_model = base_run,
                                 resamples = 99, 
+                                base_data = test_data,
                                 num_cores = 4)
 
 ## ---- cache=TRUE---------------------------------------------------------
@@ -31,14 +32,17 @@ print(bootstrap_over_subj)
 ## ---- cache=TRUE---------------------------------------------------------
 b_list1 <- BootGlmm(base_model = base_run,
                     resamples = 29, 
+                    base_data = test_data,
                     num_cores = 1,
                     return_coefs_instead = TRUE)
 b_list2 <- BootGlmm(base_model = base_run,
                     resamples = 30, 
+                    base_data = test_data,
                     num_cores = 1,
                     return_coefs_instead = TRUE)
 b_list3 <- BootGlmm(base_model = base_run,
                     resamples = 30, 
+                    base_data = test_data,
                     num_cores = 1,
                     return_coefs_instead = TRUE)
 
