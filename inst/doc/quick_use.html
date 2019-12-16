@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -13,7 +12,7 @@
 
 <meta name="author" content="Colman Humphrey" />
 
-<meta name="date" content="2019-09-02" />
+<meta name="date" content="2019-12-15" />
 
 <title>Quick Usage Guide</title>
 
@@ -304,7 +303,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Quick Usage Guide</h1>
 <h4 class="author">Colman Humphrey</h4>
-<h4 class="date">2019-09-02</h4>
+<h4 class="date">2019-12-15</h4>
 
 
 
@@ -336,25 +335,23 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb2-4" title="4">base_run &lt;-<span class="st"> </span><span class="kw">glmmTMB</span>(<span class="dt">formula =</span> model_formula,</a>
 <a class="sourceLine" id="cb2-5" title="5">                    <span class="dt">data =</span> test_data,</a>
 <a class="sourceLine" id="cb2-6" title="6">                    <span class="dt">family =</span> binomial)</a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co"># Warning in eval(family$initialize): non-integer #successes in a binomial</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co"># glm!</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co"># Warning in eval(family$initialize): non-integer #successes in a binomial glm!</span></a></code></pre></div>
 <p>We get a warning because the outcome data is proportional. Not to worry.</p>
 <p>Now we’ll use the bootstrap. By default it’ll perform block bootstrapping over the highest entropy random effect - but there’s only one, so of course the winner is <code>subj</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">bootstrap_over_subj &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
 <a class="sourceLine" id="cb3-2" title="2">                                       <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb3-3" title="3">                                       <span class="dt">resamples =</span> <span class="dv">99</span>)</a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># Performing block resampling, over subj</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-3" title="3">                                       <span class="dt">resamples =</span> <span class="dv">99</span>)</a></code></pre></div>
 <p>For publications etc, better to run about ten thousand resamples to avoid noise having much of an effect. Of course 99 is far too small, only for an example.</p>
 <p>And comparing results:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">print</span>(bootstrap_over_subj)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.1852     1.2099         0.14       0.1636</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co"># x_var1      0.1909343   -0.1195     0.5351         0.24       0.2338</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># x_var2      0.3140507    0.0856     0.5092         0.02       0.0396</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#             base 2.5% base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># (Intercept)   -0.2449     1.4487       0.8237075</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co"># x_var1        -0.1234     0.5052       1.0415190</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co"># x_var2         0.0150     0.6131       0.7082128</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.1567     1.1846         0.10       0.1636   -0.2449</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># x_var1      0.1909343   -0.0629     0.4932         0.22       0.2338   -0.1234</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># x_var2      0.3140507    0.0140     0.5413         0.06       0.0396    0.0150</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co"># (Intercept)     1.4487       0.7919990</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co"># x_var1          0.5052       0.8847259</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co"># x_var2          0.6131       0.8816162</span></a></code></pre></div>
 </div>
 <div id="combining-runs" class="section level2">
 <h2>Combining Runs</h2>
@@ -363,39 +360,36 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb5-2" title="2">                           <span class="dt">base_data =</span> test_data,</a>
 <a class="sourceLine" id="cb5-3" title="3">                           <span class="dt">resamples =</span> <span class="dv">29</span>,</a>
 <a class="sourceLine" id="cb5-4" title="4">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co"># Performing block resampling, over subj</span></a>
-<a class="sourceLine" id="cb5-6" title="6">b_list2 &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb5-7" title="7">                           <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb5-8" title="8">                           <span class="dt">resamples =</span> <span class="dv">30</span>,</a>
-<a class="sourceLine" id="cb5-9" title="9">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co"># Performing block resampling, over subj</span></a>
-<a class="sourceLine" id="cb5-11" title="11">b_list3 &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb5-12" title="12">                           <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb5-13" title="13">                           <span class="dt">resamples =</span> <span class="dv">30</span>,</a>
-<a class="sourceLine" id="cb5-14" title="14">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="co"># Performing block resampling, over subj</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-5" title="5">b_list2 &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
+<a class="sourceLine" id="cb5-6" title="6">                           <span class="dt">base_data =</span> test_data,</a>
+<a class="sourceLine" id="cb5-7" title="7">                           <span class="dt">resamples =</span> <span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb5-8" title="8">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-9" title="9">b_list3 &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
+<a class="sourceLine" id="cb5-10" title="10">                           <span class="dt">base_data =</span> test_data,</a>
+<a class="sourceLine" id="cb5-11" title="11">                           <span class="dt">resamples =</span> <span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb5-12" title="12">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Combining this is simple enough. If we’ve used a few, we don’t want to mess around with even more lists, so we can enter them into the relevant function:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">print</span>(<span class="kw">combine_resampled_lists</span>(b_list1, b_list2, b_list3))</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.0381     1.3170       0.0667       0.1636</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># x_var1      0.1909343   -0.1595     0.4680       0.2444       0.2338</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co"># x_var2      0.3140507    0.0401     0.5377       0.0222       0.0396</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#             base 2.5% base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co"># (Intercept)   -0.2449     1.4487       0.8000964</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co"># x_var1        -0.1234     0.5052       0.9983490</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co"># x_var2         0.0150     0.6131       0.8319557</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.0689     1.2797       0.1556       0.1636   -0.2449</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># x_var1      0.1909343   -0.1016     0.5013       0.2444       0.2338   -0.1234</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co"># x_var2      0.3140507    0.0298     0.5803       0.0444       0.0396    0.0150</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co"># (Intercept)     1.4487       0.7962928</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co"># x_var1          0.5052       0.9591109</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co"># x_var2          0.6131       0.9204678</span></a></code></pre></div>
 <p>If we’ve run a huge number of such runs, ideally we’ll combine all output to a list of lists, like so:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">list_of_lists_output &lt;-<span class="st"> </span><span class="kw">list</span>(b_list1, b_list2, b_list3)</a></code></pre></div>
 <p>And we’ll get the same result:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">print</span>(<span class="kw">combine_resampled_lists</span>(list_of_lists_output))</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.0381     1.3170       0.0667       0.1636</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co"># x_var1      0.1909343   -0.1595     0.4680       0.2444       0.2338</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co"># x_var2      0.3140507    0.0401     0.5377       0.0222       0.0396</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#             base 2.5% base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co"># (Intercept)   -0.2449     1.4487       0.8000964</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co"># x_var1        -0.1234     0.5052       0.9983490</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co"># x_var2         0.0150     0.6131       0.8319557</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.0689     1.2797       0.1556       0.1636   -0.2449</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co"># x_var1      0.1909343   -0.1016     0.5013       0.2444       0.2338   -0.1234</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co"># x_var2      0.3140507    0.0298     0.5803       0.0444       0.0396    0.0150</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co"># (Intercept)     1.4487       0.7962928</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co"># x_var1          0.5052       0.9591109</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co"># x_var2          0.6131       0.9204678</span></a></code></pre></div>
 <p>You MUST set <code>return_coefs_instead = TRUE</code> for methods like these that combine output.</p>
 </div>
 <div id="parallel-options" class="section level2">
@@ -432,7 +426,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </div>
 <div id="parallelism-future" class="section level3">
 <h3><code>parallelism = &quot;future&quot;</code></h3>
-<p>This uses the very nice <code>future.apply::future_lapply</code> function to run the models in parallel. Note that you MUST set the <code>future::plan</code> (see the docs for the <code>future</code> and <code>future.apply</code> packages) to actually make use of multiple cores etc. Using <code>num_cores</code> is NOT the right way to set the backend, and will cause an error.</p>
+<p>This uses the very nice <code>future.apply::future_lapply</code> function to run the models in parallel. Note that you MUST set the <code>future::plan</code> (see the docs for the <code>future</code> and <code>future.apply</code> packages) to actually make use of multiple cores etc, or else you’ll just get a sequential run. Using <code>num_cores</code> is NOT the right way to set the backend, and will cause an error.</p>
+<p>Further, in many cases you should supply any packages required for the model to run with the argument <code>future_packages</code>, because the S3 generic <code>update()</code> is used to update the model, which won’t ship the required globals. You don’t need this if using <code>plan(multicore)</code>, since all futures will have access to the same shared memory (and you also don’t need it if your model is a base model, e.g. <code>glm</code>).</p>
 <p>This should work well with Windows.</p>
 <p>Example:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">library</span>(future)</a>
@@ -441,7 +436,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb10-4" title="4">model_results &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> some_base_run,</a>
 <a class="sourceLine" id="cb10-5" title="5">                                 <span class="dt">base_data =</span> some_interesting_data,</a>
 <a class="sourceLine" id="cb10-6" title="6">                                 <span class="dt">resamples =</span> <span class="dv">9999</span>,</a>
-<a class="sourceLine" id="cb10-7" title="7">                                 <span class="dt">parallelism =</span> <span class="st">&quot;future&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb10-7" title="7">                                 <span class="dt">parallelism =</span> <span class="st">&quot;future&quot;</span>,</a>
+<a class="sourceLine" id="cb10-8" title="8">                                 <span class="dt">future_packages =</span> <span class="st">&quot;glmmTMB&quot;</span>)</a></code></pre></div>
 </div>
 <div id="only-setting-num_cores" class="section level3">
 <h3>Only setting <code>num_cores</code></h3>
@@ -475,14 +471,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb13-3" title="3"><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>total_iterations) {</a>
 <a class="sourceLine" id="cb13-4" title="4">    <span class="co">## simulate expensive operation...</span></a>
 <a class="sourceLine" id="cb13-5" title="5">    <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb13-6" title="6">    </a>
+<a class="sourceLine" id="cb13-6" title="6"></a>
 <a class="sourceLine" id="cb13-7" title="7">    <span class="kw">print</span>(<span class="kw">log_remaining</span>(start_time, <span class="kw">Sys.time</span>(), j, total_iterations, <span class="st">&quot;secs&quot;</span>))</a>
 <a class="sourceLine" id="cb13-8" title="8">}</a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co"># [1] &quot;[2019-09-02 13:29:30] [iteration 1] total secs: 2.005 // est remaining secs: 8.019&quot;</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co"># [1] &quot;[2019-09-02 13:29:32] [iteration 2] total secs: 4.014 // est remaining secs: 6.021&quot;</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co"># [1] &quot;[2019-09-02 13:29:34] [iteration 3] total secs: 6.014 // est remaining secs: 4.01&quot;</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co"># [1] &quot;[2019-09-02 13:29:36] [iteration 4] total secs: 8.015 // est remaining secs: 2.004&quot;</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co"># [1] &quot;[2019-09-02 13:29:38] [iteration 5] total secs: 10.021 // est remaining secs: 0&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-9" title="9"><span class="co"># [1] &quot;[2019-12-15 21:20:50] [iteration 1] total secs: 2.009 // est remaining secs: 8.036&quot;</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="co"># [1] &quot;[2019-12-15 21:20:52] [iteration 2] total secs: 4.018 // est remaining secs: 6.028&quot;</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="co"># [1] &quot;[2019-12-15 21:20:54] [iteration 3] total secs: 6.023 // est remaining secs: 4.015&quot;</span></a>
+<a class="sourceLine" id="cb13-12" title="12"><span class="co"># [1] &quot;[2019-12-15 21:20:56] [iteration 4] total secs: 8.026 // est remaining secs: 2.007&quot;</span></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="co"># [1] &quot;[2019-12-15 21:20:58] [iteration 5] total secs: 10.027 // est remaining secs: 0&quot;</span></a></code></pre></div>
 <p>As before, don’t forget <code>return_coefs_instead = TRUE</code>. We’d run:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">library</span>(future)</a>
 <a class="sourceLine" id="cb14-2" title="2"><span class="kw">plan</span>(<span class="st">&quot;multiprocess&quot;</span>)</a>
@@ -541,13 +537,13 @@ Note the various macros within the `vignette` section of the metadata block abov
 
 The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
 
-    output: 
+    output:
       rmarkdown::html_vignette:
         css: mystyles.css
 
 ## Figures
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+The figure sizes have been customised so that you can easily put two images side-by-side.
 
 
 ```r

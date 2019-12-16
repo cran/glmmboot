@@ -1,18 +1,21 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#"
 )
 knitr::opts_chunk$set(cache=TRUE)
 knitr::opts_knit$set(cache.extra = 234) # seed
+options(warnPartialMatchArgs = FALSE,
+        warnPartialMatchDollar = FALSE,
+        warnPartialMatchAttr = FALSE)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 library(glmmboot)
 data(test_data)
 
 head(test_data)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 library(glmmTMB)
 model_formula <- as.formula(y ~ x_var1 + x_var2 + x_var2 + (1 | subj))
 
@@ -20,15 +23,15 @@ base_run <- glmmTMB(formula = model_formula,
                     data = test_data,
                     family = binomial)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 bootstrap_over_subj <- bootstrap_model(base_model = base_run,
                                        base_data = test_data,
                                        resamples = 99)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 print(bootstrap_over_subj)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 b_list1 <- bootstrap_model(base_model = base_run,
                            base_data = test_data,
                            resamples = 29,
@@ -42,16 +45,16 @@ b_list3 <- bootstrap_model(base_model = base_run,
                            resamples = 30,
                            return_coefs_instead = TRUE)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 print(combine_resampled_lists(b_list1, b_list2, b_list3))
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 list_of_lists_output <- list(b_list1, b_list2, b_list3)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 print(combine_resampled_lists(list_of_lists_output))
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  ## will use `parallel::detectCores() - 1` cores
 #  model_results <- bootstrap_model(base_model = some_base_run,
 #                                   base_data = some_interesting_data,
@@ -65,22 +68,23 @@ print(combine_resampled_lists(list_of_lists_output))
 #                                   parallelism = "parallel",
 #                                   num_cores = 4)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(future)
 #  plan("multiprocess") # "multiprocess" should work across Windows / Mac / Linux
 #  
 #  model_results <- bootstrap_model(base_model = some_base_run,
 #                                   base_data = some_interesting_data,
 #                                   resamples = 9999,
-#                                   parallelism = "future")
+#                                   parallelism = "future",
+#                                   future_packages = "glmmTMB")
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  model_results <- bootstrap_model(base_model = some_base_run,
 #                                   base_data = some_interesting_data,
 #                                   resamples = 9999,
 #                                   num_cores = 8)
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 log_remaining <- function(start_time,
                           cur_time,
                           j,
@@ -94,17 +98,17 @@ log_remaining <- function(start_time,
            "est remaining ", time_units, ": ", round(est_remaining, 3))
 }
 
-## ---- cache=TRUE---------------------------------------------------------
+## ---- cache=TRUE--------------------------------------------------------------
 total_iterations <- 5
 start_time <- Sys.time()
 for (j in 1:total_iterations) {
     ## simulate expensive operation...
     Sys.sleep(2)
-    
+
     print(log_remaining(start_time, Sys.time(), j, total_iterations, "secs"))
 }
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(future)
 #  plan("multiprocess")
 #  
@@ -125,7 +129,7 @@ for (j in 1:total_iterations) {
 #  
 #  combined_results <- combine_resampled_lists(results_list)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  owls <- transform(Owls,
 #                    nest = reorder(Nest, NegPerChick),
 #                    ncalls = SiblingNegotiation,
@@ -138,15 +142,15 @@ for (j in 1:total_iterations) {
 #      ziformula = ~1,
 #      family = poisson)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  zero_boot <- bootstrap_model(base_model = fit_zipoisson,
 #                               base_data = owls,
 #                               resamples = 9999)
 
-## ---- fig.show='hold'----------------------------------------------------
+## ---- fig.show='hold'---------------------------------------------------------
 plot(1:10)
 plot(10:1)
 
-## ---- echo=FALSE, results='asis'-----------------------------------------
+## ---- echo=FALSE, results='asis'----------------------------------------------
 knitr::kable(head(mtcars, 10))
 
