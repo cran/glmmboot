@@ -12,7 +12,7 @@
 
 <meta name="author" content="Colman Humphrey" />
 
-<meta name="date" content="2019-12-15" />
+<meta name="date" content="2020-03-29" />
 
 <title>Quick Usage Guide</title>
 
@@ -303,7 +303,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Quick Usage Guide</h1>
 <h4 class="author">Colman Humphrey</h4>
-<h4 class="date">2019-12-15</h4>
+<h4 class="date">2020-03-29</h4>
 
 
 
@@ -345,13 +345,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>And comparing results:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">print</span>(bootstrap_over_subj)</a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.1567     1.1846         0.10       0.1636   -0.2449</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co"># x_var1      0.1909343   -0.0629     0.4932         0.22       0.2338   -0.1234</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># x_var2      0.3140507    0.0140     0.5413         0.06       0.0396    0.0150</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.1050     1.2018         0.14       0.1636   -0.2449</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># x_var1      0.1909343   -0.1192     0.5888         0.24       0.2338   -0.1234</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># x_var2      0.3140507    0.0535     0.5376         0.04       0.0396    0.0150</span></a>
 <a class="sourceLine" id="cb4-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># (Intercept)     1.4487       0.7919990</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co"># x_var1          0.5052       0.8847259</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co"># x_var2          0.6131       0.8816162</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co"># (Intercept)     1.4487       0.7715774</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co"># x_var1          0.5052       1.1263951</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co"># x_var2          0.6131       0.8093863</span></a></code></pre></div>
 </div>
 <div id="combining-runs" class="section level2">
 <h2>Combining Runs</h2>
@@ -371,25 +371,25 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Combining this is simple enough. If we’ve used a few, we don’t want to mess around with even more lists, so we can enter them into the relevant function:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">print</span>(<span class="kw">combine_resampled_lists</span>(b_list1, b_list2, b_list3))</a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.0689     1.2797       0.1556       0.1636   -0.2449</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># x_var1      0.1909343   -0.1016     0.5013       0.2444       0.2338   -0.1234</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co"># x_var2      0.3140507    0.0298     0.5803       0.0444       0.0396    0.0150</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># (Intercept) 0.6018968    0.0168     1.0446       0.0444       0.1636   -0.2449</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># x_var1      0.1909343   -0.1379     0.4916       0.4222       0.2338   -0.1234</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co"># x_var2      0.3140507    0.0992     0.5177       0.0222       0.0396    0.0150</span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co"># (Intercept)     1.4487       0.7962928</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co"># x_var1          0.5052       0.9591109</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co"># x_var2          0.6131       0.9204678</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co"># (Intercept)     1.4487       0.6068176</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co"># x_var1          0.5052       1.0014936</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co"># x_var2          0.6131       0.6997574</span></a></code></pre></div>
 <p>If we’ve run a huge number of such runs, ideally we’ll combine all output to a list of lists, like so:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">list_of_lists_output &lt;-<span class="st"> </span><span class="kw">list</span>(b_list1, b_list2, b_list3)</a></code></pre></div>
 <p>And we’ll get the same result:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">print</span>(<span class="kw">combine_resampled_lists</span>(list_of_lists_output))</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.0689     1.2797       0.1556       0.1636   -0.2449</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co"># x_var1      0.1909343   -0.1016     0.5013       0.2444       0.2338   -0.1234</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co"># x_var2      0.3140507    0.0298     0.5803       0.0444       0.0396    0.0150</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co"># (Intercept) 0.6018968    0.0168     1.0446       0.0444       0.1636   -0.2449</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co"># x_var1      0.1909343   -0.1379     0.4916       0.4222       0.2338   -0.1234</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co"># x_var2      0.3140507    0.0992     0.5177       0.0222       0.0396    0.0150</span></a>
 <a class="sourceLine" id="cb8-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co"># (Intercept)     1.4487       0.7962928</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co"># x_var1          0.5052       0.9591109</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co"># x_var2          0.6131       0.9204678</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co"># (Intercept)     1.4487       0.6068176</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co"># x_var1          0.5052       1.0014936</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co"># x_var2          0.6131       0.6997574</span></a></code></pre></div>
 <p>You MUST set <code>return_coefs_instead = TRUE</code> for methods like these that combine output.</p>
 </div>
 <div id="parallel-options" class="section level2">
@@ -474,11 +474,11 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb13-6" title="6"></a>
 <a class="sourceLine" id="cb13-7" title="7">    <span class="kw">print</span>(<span class="kw">log_remaining</span>(start_time, <span class="kw">Sys.time</span>(), j, total_iterations, <span class="st">&quot;secs&quot;</span>))</a>
 <a class="sourceLine" id="cb13-8" title="8">}</a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co"># [1] &quot;[2019-12-15 21:20:50] [iteration 1] total secs: 2.009 // est remaining secs: 8.036&quot;</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co"># [1] &quot;[2019-12-15 21:20:52] [iteration 2] total secs: 4.018 // est remaining secs: 6.028&quot;</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co"># [1] &quot;[2019-12-15 21:20:54] [iteration 3] total secs: 6.023 // est remaining secs: 4.015&quot;</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co"># [1] &quot;[2019-12-15 21:20:56] [iteration 4] total secs: 8.026 // est remaining secs: 2.007&quot;</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co"># [1] &quot;[2019-12-15 21:20:58] [iteration 5] total secs: 10.027 // est remaining secs: 0&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-9" title="9"><span class="co"># [1] &quot;[2020-03-29 15:42:09] [iteration 1] total secs: 2.004 // est remaining secs: 8.017&quot;</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="co"># [1] &quot;[2020-03-29 15:42:11] [iteration 2] total secs: 4.015 // est remaining secs: 6.023&quot;</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="co"># [1] &quot;[2020-03-29 15:42:13] [iteration 3] total secs: 6.02 // est remaining secs: 4.014&quot;</span></a>
+<a class="sourceLine" id="cb13-12" title="12"><span class="co"># [1] &quot;[2020-03-29 15:42:15] [iteration 4] total secs: 8.025 // est remaining secs: 2.006&quot;</span></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="co"># [1] &quot;[2020-03-29 15:42:17] [iteration 5] total secs: 10.028 // est remaining secs: 0&quot;</span></a></code></pre></div>
 <p>As before, don’t forget <code>return_coefs_instead = TRUE</code>. We’d run:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">library</span>(future)</a>
 <a class="sourceLine" id="cb14-2" title="2"><span class="kw">plan</span>(<span class="st">&quot;multiprocess&quot;</span>)</a>

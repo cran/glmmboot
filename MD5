@@ -1,9 +1,9 @@
-41ba2a0a7d59ef9c69db6d23e860b369 *DESCRIPTION
+2fd8747e192b50ed9e352497fe18241a *DESCRIPTION
 7d6becec12d14f12b24bfaa7c9bebcc6 *LICENSE
 43be2270d6caa33018c8ba781ef119d6 *NAMESPACE
-1466c7103ce09cbf725a50d0d54251bc *NEWS.md
+ca8b1af646b8d5cfd0e0f7ad5dd4b33d *NEWS.md
 2fe577512897f53a31a2a5426fec865a *R/bootstrap_ci.R
-348986b1116a8ea3db571243339f5811 *R/bootstrap_methods.R
+bd98d9e8bbb81dd4dc78f94138409594 *R/bootstrap_methods.R
 475eb6c9d3fe5d0c9f22ed5565dbae27 *R/bootstrap_model.R
 d1bc2cbbc23e9b8f5cbdb88ce4bbf560 *R/data.R
 cde860b60e0d8750c96f3cc8aed745c5 *README.md
@@ -11,7 +11,7 @@ cde860b60e0d8750c96f3cc8aed745c5 *README.md
 73cc044910dbe03011ae706f5f9156d2 *data/test_data.rda
 a471ba8f1a4c16174e8053fb356d0237 *inst/doc/quick_use.R
 612308a6229d1c2d82dd575f5a397342 *inst/doc/quick_use.Rmd
-7925b4e71fa524785328a6ac3db9c64c *inst/doc/quick_use.html
+5c062157dc24534a50d2abd7c6aed8e9 *inst/doc/quick_use.html
 c88777cab06bebeeed3fb6c013435f48 *man/bootstrap_ci.Rd
 208fabd64567f709a53d579275a68449 *man/bootstrap_individual_ci.Rd
 ab19d3a23395b4129ee8df888b323310 *man/bootstrap_model.Rd
@@ -23,7 +23,7 @@ e2ea01802aa7e2ef278828a37ae70eb9 *man/combine_resampled_lists.Rd
 98dc952318b23df6e7b43039aced3d24 *man/gen_resampling_index.Rd
 b9c308277c8522b36ae017d9ea61b76d *man/gen_samp_lev.Rd
 ec33d89bf4c80ae5621887a9e78a1f78 *man/gen_sample.Rd
-951b7363d57824d8825c9a0ca5641086 *man/gen_vector_match.Rd
+5adf80d63f583ae9314f28a2a9d54ec5 *man/gen_vector_match.Rd
 7dee7ca2e595e6fe618dbd293caf3aab *man/get_rand.Rd
 fae4caa6242c52273ce70d8cdd86e138 *man/list_of_matrices.Rd
 d4c28c50db29b1c57817ca44c33544ad *man/not_error_check.Rd
