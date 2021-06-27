@@ -8,38 +8,57 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Colman Humphrey" />
 
-<meta name="date" content="2020-03-29" />
+<meta name="date" content="2021-06-27" />
 
 <title>Quick Usage Guide</title>
 
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -48,9 +67,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -107,189 +126,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
-}
-#header {
-text-align: center;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
-}
-pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: #f7f7f7;
-}
-code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
-}
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -303,93 +141,94 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Quick Usage Guide</h1>
 <h4 class="author">Colman Humphrey</h4>
-<h4 class="date">2020-03-29</h4>
+<h4 class="date">2021-06-27</h4>
 
 
 
 <div id="glmmboot-quick-use" class="section level1">
 <h1>glmmboot: Quick Use</h1>
 <p>For even quicker usage instructions, see the README.</p>
-<p>The general idea of this package is that you can throw nearly any model built in the typical R fashion. For now, we just need a somewhat standard way of extracting fixed effects, and that <code>update</code> works, which is nearly always the case.</p>
+<p>The general idea behind this package is for you to be able to throw in nearly any model built in the typical R fashion and get back a non-parametric bootstrap analysis. For now, we just need a somewhat standard way of extracting fixed effects, and that <code>update</code> works, which is nearly always the case.</p>
 <p>Assuming your model is called <code>base_model</code>, if <code>coef(summary(base_model))</code> gives the estimates and standard errors, the method will work. The result of <code>coef</code> is often a list; this package will then produce estimates for each element of the list. Common examples where there are multiple sets of coefficients are zero-inflated models.</p>
 <p>The data should be supplied manually, although it’s currently the case that if the dataframe that creates the model is accessible from <code>base_model$model</code>, <code>base_model$frame</code> or <code>base_model@frame</code>, you won’t have to send the data in to the function separately (but you will get a warning). Be careful here - some models supply this but the method introduces bugs. Much safer to supply the data explicitly.</p>
 <div id="standard-example" class="section level2">
 <h2>Standard Example</h2>
 <p>Let’s work through an example with <code>glmmTMB</code>. We’ll use the data that comes with <code>glmmboot</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(glmmboot)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">data</span>(test_data)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">head</span>(test_data)</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co">#       x_var1    x_var2     x_var3 subj          y</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="co"># 1 -0.3603511 2.7427146  0.2636070    3 1.00000000</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co"># 2  2.6866123 1.5713332  0.1509874   20 0.08064748</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co"># 3  0.6342672 0.9936967  0.1261363   19 0.43073744</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="co"># 4  1.1648519 1.6567148  0.6139765   33 0.98353502</span></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="co"># 5  0.7842167 1.3459927 -0.7063382    1 1.00000000</span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="co"># 6  2.8261973 1.9342870  1.2697793    3 1.00000000</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmboot)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(test_data)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(test_data)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       x_var1    x_var2     x_var3 subj          y</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 -0.3603511 2.7427146  0.2636070    3 1.00000000</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  2.6866123 1.5713332  0.1509874   20 0.08064748</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3  0.6342672 0.9936967  0.1261363   19 0.43073744</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 4  1.1648519 1.6567148  0.6139765   33 0.98353502</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 5  0.7842167 1.3459927 -0.7063382    1 1.00000000</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 6  2.8261973 1.9342870  1.2697793    3 1.00000000</span></span></code></pre></div>
 <p>We’re assuming the <code>x_var</code> variables are fixed, and <code>subj</code> is to be treated as a random effect.</p>
 <p>Thus our base analysis is:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(glmmTMB)</a>
-<a class="sourceLine" id="cb2-2" title="2">model_formula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(y <span class="op">~</span><span class="st"> </span>x_var1 <span class="op">+</span><span class="st"> </span>x_var2 <span class="op">+</span><span class="st"> </span>x_var2 <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subj))</a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4">base_run &lt;-<span class="st"> </span><span class="kw">glmmTMB</span>(<span class="dt">formula =</span> model_formula,</a>
-<a class="sourceLine" id="cb2-5" title="5">                    <span class="dt">data =</span> test_data,</a>
-<a class="sourceLine" id="cb2-6" title="6">                    <span class="dt">family =</span> binomial)</a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co"># Warning in eval(family$initialize): non-integer #successes in a binomial glm!</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## we&#39;ll skip this if glmmTMB not available</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>model_formula <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(y <span class="sc">~</span> x_var1 <span class="sc">+</span> x_var2 <span class="sc">+</span> x_var2 <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subj))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>base_run <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">formula =</span> model_formula,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> test_data,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">family =</span> binomial)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Warning in eval(family$initialize): non-integer #successes in a binomial glm!</span></span></code></pre></div>
 <p>We get a warning because the outcome data is proportional. Not to worry.</p>
 <p>Now we’ll use the bootstrap. By default it’ll perform block bootstrapping over the highest entropy random effect - but there’s only one, so of course the winner is <code>subj</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">bootstrap_over_subj &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb3-2" title="2">                                       <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb3-3" title="3">                                       <span class="dt">resamples =</span> <span class="dv">99</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bootstrap_over_subj <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> base_run,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">base_data =</span> test_data,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">resamples =</span> <span class="dv">99</span>)</span></code></pre></div>
 <p>For publications etc, better to run about ten thousand resamples to avoid noise having much of an effect. Of course 99 is far too small, only for an example.</p>
 <p>And comparing results:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">print</span>(bootstrap_over_subj)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># (Intercept) 0.6018968   -0.1050     1.2018         0.14       0.1636   -0.2449</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co"># x_var1      0.1909343   -0.1192     0.5888         0.24       0.2338   -0.1234</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># x_var2      0.3140507    0.0535     0.5376         0.04       0.0396    0.0150</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># (Intercept)     1.4487       0.7715774</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co"># x_var1          0.5052       1.1263951</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co"># x_var2          0.6131       0.8093863</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(bootstrap_over_subj)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept) 0.6018968   -0.1318     1.1313         0.10       0.1636   -0.2449</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var1      0.1909343   -0.0725     0.5611         0.12       0.2338   -0.1234</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var2      0.3140507    0.0081     0.5033         0.06       0.0396    0.0150</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             base 97.5% boot/base width</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept)     1.4487       0.7458018</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var1          0.5052       1.0078966</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var2          0.6131       0.8279109</span></span></code></pre></div>
 </div>
 <div id="combining-runs" class="section level2">
 <h2>Combining Runs</h2>
 <p>The above might take a long time in a real setting. If it takes far too long on your machine, you can ideally run it on a bunch of computers. We don’t want each computer to output the fully processed output, only the intermediate outcome. To do this, we set <code>return_coefs_instead = TRUE</code> for each run:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">b_list1 &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb5-2" title="2">                           <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb5-3" title="3">                           <span class="dt">resamples =</span> <span class="dv">29</span>,</a>
-<a class="sourceLine" id="cb5-4" title="4">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-5" title="5">b_list2 &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb5-6" title="6">                           <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb5-7" title="7">                           <span class="dt">resamples =</span> <span class="dv">30</span>,</a>
-<a class="sourceLine" id="cb5-8" title="8">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-9" title="9">b_list3 &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb5-10" title="10">                           <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb5-11" title="11">                           <span class="dt">resamples =</span> <span class="dv">30</span>,</a>
-<a class="sourceLine" id="cb5-12" title="12">                           <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>b_list1 <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> base_run,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">base_data =</span> test_data,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">resamples =</span> <span class="dv">29</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">return_coefs_instead =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>b_list2 <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> base_run,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">base_data =</span> test_data,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">resamples =</span> <span class="dv">30</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">return_coefs_instead =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>b_list3 <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> base_run,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">base_data =</span> test_data,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">resamples =</span> <span class="dv">30</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">return_coefs_instead =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Combining this is simple enough. If we’ve used a few, we don’t want to mess around with even more lists, so we can enter them into the relevant function:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">print</span>(<span class="kw">combine_resampled_lists</span>(b_list1, b_list2, b_list3))</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># (Intercept) 0.6018968    0.0168     1.0446       0.0444       0.1636   -0.2449</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># x_var1      0.1909343   -0.1379     0.4916       0.4222       0.2338   -0.1234</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co"># x_var2      0.3140507    0.0992     0.5177       0.0222       0.0396    0.0150</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co"># (Intercept)     1.4487       0.6068176</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co"># x_var1          0.5052       1.0014936</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co"># x_var2          0.6131       0.6997574</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">combine_resampled_lists</span>(b_list1, b_list2, b_list3))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept) 0.6018968   -0.0864     1.1520       0.1111       0.1636   -0.2449</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var1      0.1909343   -0.0968     0.5712       0.2000       0.2338   -0.1234</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var2      0.3140507    0.0392     0.5458       0.0444       0.0396    0.0150</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             base 97.5% boot/base width</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept)     1.4487       0.7312067</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var1          0.5052       1.0626676</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var2          0.6131       0.8470228</span></span></code></pre></div>
 <p>If we’ve run a huge number of such runs, ideally we’ll combine all output to a list of lists, like so:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">list_of_lists_output &lt;-<span class="st"> </span><span class="kw">list</span>(b_list1, b_list2, b_list3)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>list_of_lists_output <span class="ot">&lt;-</span> <span class="fu">list</span>(b_list1, b_list2, b_list3)</span></code></pre></div>
 <p>And we’ll get the same result:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">print</span>(<span class="kw">combine_resampled_lists</span>(list_of_lists_output))</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co"># (Intercept) 0.6018968    0.0168     1.0446       0.0444       0.1636   -0.2449</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co"># x_var1      0.1909343   -0.1379     0.4916       0.4222       0.2338   -0.1234</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co"># x_var2      0.3140507    0.0992     0.5177       0.0222       0.0396    0.0150</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#             base 97.5% boot/base width</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co"># (Intercept)     1.4487       0.6068176</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co"># x_var1          0.5052       1.0014936</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co"># x_var2          0.6131       0.6997574</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">combine_resampled_lists</span>(list_of_lists_output))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              estimate boot 2.5% boot 97.5% boot p_value base p_value base 2.5%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept) 0.6018968   -0.0864     1.1520       0.1111       0.1636   -0.2449</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var1      0.1909343   -0.0968     0.5712       0.2000       0.2338   -0.1234</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var2      0.3140507    0.0392     0.5458       0.0444       0.0396    0.0150</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             base 97.5% boot/base width</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept)     1.4487       0.7312067</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var1          0.5052       1.0626676</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># x_var2          0.6131       0.8470228</span></span></code></pre></div>
 <p>You MUST set <code>return_coefs_instead = TRUE</code> for methods like these that combine output.</p>
 </div>
 <div id="parallel-options" class="section level2">
@@ -409,18 +248,18 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h3><code>parallelism = &quot;parallel&quot;</code></h3>
 <p>This will use <code>parallel::mclapply</code> to run the models. If you set <code>num_cores</code>, then that many cores will be used. If you don’t set <code>num_cores</code>, the function will use <code>num_cores = parallel::detectCores() - 1</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co">## will use `parallel::detectCores() - 1` cores</span></a>
-<a class="sourceLine" id="cb9-2" title="2">model_results &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> some_base_run,</a>
-<a class="sourceLine" id="cb9-3" title="3">                                 <span class="dt">base_data =</span> some_interesting_data,</a>
-<a class="sourceLine" id="cb9-4" title="4">                                 <span class="dt">resamples =</span> <span class="dv">9999</span>,</a>
-<a class="sourceLine" id="cb9-5" title="5">                                 <span class="dt">parallelism =</span> <span class="st">&quot;parallel&quot;</span>)</a>
-<a class="sourceLine" id="cb9-6" title="6"></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">## will use 4 cores:</span></a>
-<a class="sourceLine" id="cb9-8" title="8">model_results &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> some_base_run,</a>
-<a class="sourceLine" id="cb9-9" title="9">                                 <span class="dt">base_data =</span> some_interesting_data,</a>
-<a class="sourceLine" id="cb9-10" title="10">                                 <span class="dt">resamples =</span> <span class="dv">9999</span>,</a>
-<a class="sourceLine" id="cb9-11" title="11">                                 <span class="dt">parallelism =</span> <span class="st">&quot;parallel&quot;</span>,</a>
-<a class="sourceLine" id="cb9-12" title="12">                                 <span class="dt">num_cores =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## will use `parallel::detectCores() - 1` cores</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model_results <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> some_base_run,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">base_data =</span> some_interesting_data,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">resamples =</span> <span class="dv">9999</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">parallelism =</span> <span class="st">&quot;parallel&quot;</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## will use 4 cores:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>model_results <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> some_base_run,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">base_data =</span> some_interesting_data,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">resamples =</span> <span class="dv">9999</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">parallelism =</span> <span class="st">&quot;parallel&quot;</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">num_cores =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p>I’ve heard that <code>parallel::mclapply</code> doesn’t play well on Windows. Instead of implementing <code>parallel::parLapply</code> (which I will do if there’s interest), I would recommend using <code>parallelism = &quot;future&quot;</code>, see below.</p>
 <p>This becomes the default if you don’t set <code>parallelism</code> but just <code>num_cores</code>.</p>
 </div>
@@ -430,22 +269,22 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Further, in many cases you should supply any packages required for the model to run with the argument <code>future_packages</code>, because the S3 generic <code>update()</code> is used to update the model, which won’t ship the required globals. You don’t need this if using <code>plan(multicore)</code>, since all futures will have access to the same shared memory (and you also don’t need it if your model is a base model, e.g. <code>glm</code>).</p>
 <p>This should work well with Windows.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">library</span>(future)</a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="kw">plan</span>(<span class="st">&quot;multiprocess&quot;</span>) <span class="co"># &quot;multiprocess&quot; should work across Windows / Mac / Linux</span></a>
-<a class="sourceLine" id="cb10-3" title="3"></a>
-<a class="sourceLine" id="cb10-4" title="4">model_results &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> some_base_run,</a>
-<a class="sourceLine" id="cb10-5" title="5">                                 <span class="dt">base_data =</span> some_interesting_data,</a>
-<a class="sourceLine" id="cb10-6" title="6">                                 <span class="dt">resamples =</span> <span class="dv">9999</span>,</a>
-<a class="sourceLine" id="cb10-7" title="7">                                 <span class="dt">parallelism =</span> <span class="st">&quot;future&quot;</span>,</a>
-<a class="sourceLine" id="cb10-8" title="8">                                 <span class="dt">future_packages =</span> <span class="st">&quot;glmmTMB&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(<span class="st">&quot;multiprocess&quot;</span>) <span class="co"># &quot;multiprocess&quot; should work across Windows / Mac / Linux</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>model_results <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> some_base_run,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">base_data =</span> some_interesting_data,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">resamples =</span> <span class="dv">9999</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">parallelism =</span> <span class="st">&quot;future&quot;</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">future_packages =</span> <span class="st">&quot;glmmTMB&quot;</span>)</span></code></pre></div>
 </div>
 <div id="only-setting-num_cores" class="section level3">
 <h3>Only setting <code>num_cores</code></h3>
 <p>If you don’t touch the <code>parallelism</code> argument, but just set <code>num_cores</code>, e.g.:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">model_results &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> some_base_run,</a>
-<a class="sourceLine" id="cb11-2" title="2">                                 <span class="dt">base_data =</span> some_interesting_data,</a>
-<a class="sourceLine" id="cb11-3" title="3">                                 <span class="dt">resamples =</span> <span class="dv">9999</span>,</a>
-<a class="sourceLine" id="cb11-4" title="4">                                 <span class="dt">num_cores =</span> <span class="dv">8</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model_results <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> some_base_run,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">base_data =</span> some_interesting_data,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">resamples =</span> <span class="dv">9999</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">num_cores =</span> <span class="dv">8</span>)</span></code></pre></div>
 <p>It’ll be as if you set <code>parallelism = &quot;parallel&quot;</code>, and will use the <code>parallel::mclapply</code> backend (unless you set <code>num_cores = 1</code>!).</p>
 </div>
 <div id="progress-bars-etc" class="section level3">
@@ -453,73 +292,73 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Unfortunately currently none of these methods have any progress bars setup. There used to be a call to a parallel package that did this, but it seemed to have some bugs. Hopefully this will be possible in the future.</p>
 <p>The (not great) options for now: * run a small set to estimate timing before running a large set of models * using the split approach (see the Combining Runs approach above), print out some intermediate output between runs.</p>
 <p>Let’s look at an example of the second approach, using the <code>future</code> argument. First, we’ll write a somewhat rough logging function:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">log_remaining &lt;-<span class="st"> </span><span class="cf">function</span>(start_time,</a>
-<a class="sourceLine" id="cb12-2" title="2">                          cur_time,</a>
-<a class="sourceLine" id="cb12-3" title="3">                          j,</a>
-<a class="sourceLine" id="cb12-4" title="4">                          total_iters,</a>
-<a class="sourceLine" id="cb12-5" title="5">                          <span class="dt">time_units =</span> <span class="st">&quot;hours&quot;</span>){</a>
-<a class="sourceLine" id="cb12-6" title="6">    cur_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</a>
-<a class="sourceLine" id="cb12-7" title="7">    total_time &lt;-<span class="st"> </span><span class="kw">difftime</span>(cur_time, start_time, <span class="dt">units =</span> time_units)</a>
-<a class="sourceLine" id="cb12-8" title="8">    est_remaining &lt;-<span class="st"> </span>(total_iters <span class="op">-</span><span class="st"> </span>j) <span class="op">*</span><span class="st"> </span>(total_time <span class="op">/</span><span class="st"> </span>j)</a>
-<a class="sourceLine" id="cb12-9" title="9">    <span class="kw">paste0</span>(<span class="st">&quot;[&quot;</span>, cur_time, <span class="st">&quot;] [iteration &quot;</span>, j, <span class="st">&quot;] &quot;</span>,</a>
-<a class="sourceLine" id="cb12-10" title="10">           <span class="st">&quot;total &quot;</span>, time_units, <span class="st">&quot;: &quot;</span>, <span class="kw">round</span>(total_time, <span class="dv">3</span>), <span class="st">&quot; // &quot;</span>,</a>
-<a class="sourceLine" id="cb12-11" title="11">           <span class="st">&quot;est remaining &quot;</span>, time_units, <span class="st">&quot;: &quot;</span>, <span class="kw">round</span>(est_remaining, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb12-12" title="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>log_remaining <span class="ot">&lt;-</span> <span class="cf">function</span>(start_time,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                          cur_time,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                          j,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                          total_iters,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">time_units =</span> <span class="st">&quot;hours&quot;</span>){</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    cur_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    total_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(cur_time, start_time, <span class="at">units =</span> time_units)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    est_remaining <span class="ot">&lt;-</span> (total_iters <span class="sc">-</span> j) <span class="sc">*</span> (total_time <span class="sc">/</span> j)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="st">&quot;[&quot;</span>, cur_time, <span class="st">&quot;] [iteration &quot;</span>, j, <span class="st">&quot;] &quot;</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;total &quot;</span>, time_units, <span class="st">&quot;: &quot;</span>, <span class="fu">round</span>(total_time, <span class="dv">3</span>), <span class="st">&quot; // &quot;</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;est remaining &quot;</span>, time_units, <span class="st">&quot;: &quot;</span>, <span class="fu">round</span>(est_remaining, <span class="dv">3</span>))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>This looks like:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">total_iterations &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb13-2" title="2">start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>total_iterations) {</a>
-<a class="sourceLine" id="cb13-4" title="4">    <span class="co">## simulate expensive operation...</span></a>
-<a class="sourceLine" id="cb13-5" title="5">    <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb13-6" title="6"></a>
-<a class="sourceLine" id="cb13-7" title="7">    <span class="kw">print</span>(<span class="kw">log_remaining</span>(start_time, <span class="kw">Sys.time</span>(), j, total_iterations, <span class="st">&quot;secs&quot;</span>))</a>
-<a class="sourceLine" id="cb13-8" title="8">}</a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co"># [1] &quot;[2020-03-29 15:42:09] [iteration 1] total secs: 2.004 // est remaining secs: 8.017&quot;</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co"># [1] &quot;[2020-03-29 15:42:11] [iteration 2] total secs: 4.015 // est remaining secs: 6.023&quot;</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co"># [1] &quot;[2020-03-29 15:42:13] [iteration 3] total secs: 6.02 // est remaining secs: 4.014&quot;</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co"># [1] &quot;[2020-03-29 15:42:15] [iteration 4] total secs: 8.025 // est remaining secs: 2.006&quot;</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co"># [1] &quot;[2020-03-29 15:42:17] [iteration 5] total secs: 10.028 // est remaining secs: 0&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>total_iterations <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>total_iterations) {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="do">## simulate expensive operation...</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">log_remaining</span>(start_time, <span class="fu">Sys.time</span>(), j, total_iterations, <span class="st">&quot;secs&quot;</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;[2021-06-27 15:07:39] [iteration 1] total secs: 2.007 // est remaining secs: 8.026&quot;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;[2021-06-27 15:07:41] [iteration 2] total secs: 4.021 // est remaining secs: 6.032&quot;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;[2021-06-27 15:07:43] [iteration 3] total secs: 6.027 // est remaining secs: 4.018&quot;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;[2021-06-27 15:07:45] [iteration 4] total secs: 8.032 // est remaining secs: 2.008&quot;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;[2021-06-27 15:07:47] [iteration 5] total secs: 10.037 // est remaining secs: 0&quot;</span></span></code></pre></div>
 <p>As before, don’t forget <code>return_coefs_instead = TRUE</code>. We’d run:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">library</span>(future)</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw">plan</span>(<span class="st">&quot;multiprocess&quot;</span>)</a>
-<a class="sourceLine" id="cb14-3" title="3"></a>
-<a class="sourceLine" id="cb14-4" title="4">results_list &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb14-5" title="5">num_blocks &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb14-6" title="6">runs_per_block &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb14-7" title="7"></a>
-<a class="sourceLine" id="cb14-8" title="8">start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_blocks) {</a>
-<a class="sourceLine" id="cb14-10" title="10">    results_list[[j]] &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> base_run,</a>
-<a class="sourceLine" id="cb14-11" title="11">                                         <span class="dt">base_data =</span> test_data,</a>
-<a class="sourceLine" id="cb14-12" title="12">                                         <span class="dt">resamples =</span> runs_per_block,</a>
-<a class="sourceLine" id="cb14-13" title="13">                                         <span class="dt">parallelism =</span> <span class="st">&quot;future&quot;</span>,</a>
-<a class="sourceLine" id="cb14-14" title="14">                                         <span class="dt">return_coefs_instead =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb14-15" title="15">                                         <span class="dt">suppress_sampling_message =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb14-16" title="16">    <span class="kw">print</span>(<span class="kw">log_remaining</span>(start_time, <span class="kw">Sys.time</span>(), j, num_blocks, <span class="st">&quot;secs&quot;</span>))</a>
-<a class="sourceLine" id="cb14-17" title="17">}</a>
-<a class="sourceLine" id="cb14-18" title="18"></a>
-<a class="sourceLine" id="cb14-19" title="19">combined_results &lt;-<span class="st"> </span><span class="kw">combine_resampled_lists</span>(results_list)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(<span class="st">&quot;multiprocess&quot;</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>results_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>num_blocks <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>runs_per_block <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_blocks) {</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    results_list[[j]] <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> base_run,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">base_data =</span> test_data,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">resamples =</span> runs_per_block,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">parallelism =</span> <span class="st">&quot;future&quot;</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">return_coefs_instead =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">suppress_sampling_message =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">log_remaining</span>(start_time, <span class="fu">Sys.time</span>(), j, num_blocks, <span class="st">&quot;secs&quot;</span>))</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>combined_results <span class="ot">&lt;-</span> <span class="fu">combine_resampled_lists</span>(results_list)</span></code></pre></div>
 <p>Of course with 50 blocks of size 100, we’d get the equivalent of 5000 samples.</p>
 </div>
 </div>
 <div id="zero-inflated" class="section level2">
 <h2>Zero Inflated</h2>
 <p>Let’s first reuse the model from the glmmTMB vignettes:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">owls &lt;-<span class="st"> </span><span class="kw">transform</span>(Owls,</a>
-<a class="sourceLine" id="cb15-2" title="2">                  <span class="dt">nest =</span> <span class="kw">reorder</span>(Nest, NegPerChick),</a>
-<a class="sourceLine" id="cb15-3" title="3">                  <span class="dt">ncalls =</span> SiblingNegotiation,</a>
-<a class="sourceLine" id="cb15-4" title="4">                  <span class="dt">ft =</span> FoodTreatment)</a>
-<a class="sourceLine" id="cb15-5" title="5"></a>
-<a class="sourceLine" id="cb15-6" title="6">fit_zipoisson &lt;-<span class="st"> </span><span class="kw">glmmTMB</span>(</a>
-<a class="sourceLine" id="cb15-7" title="7">    ncalls <span class="op">~</span><span class="st"> </span>(ft <span class="op">+</span><span class="st"> </span>ArrivalTime) <span class="op">*</span><span class="st"> </span>SexParent <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="st">        </span><span class="kw">offset</span>(<span class="kw">log</span>(BroodSize)) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>nest),</a>
-<a class="sourceLine" id="cb15-9" title="9">    <span class="dt">data =</span> owls,</a>
-<a class="sourceLine" id="cb15-10" title="10">    <span class="dt">ziformula =</span> <span class="op">~</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb15-11" title="11">    <span class="dt">family =</span> poisson)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>owls <span class="ot">&lt;-</span> <span class="fu">transform</span>(Owls,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nest =</span> <span class="fu">reorder</span>(Nest, NegPerChick),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ncalls =</span> SiblingNegotiation,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ft =</span> FoodTreatment)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>fit_zipoisson <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    ncalls <span class="sc">~</span> (ft <span class="sc">+</span> ArrivalTime) <span class="sc">*</span> SexParent <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">offset</span>(<span class="fu">log</span>(BroodSize)) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> nest),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> owls,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ziformula =</span> <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> poisson)</span></code></pre></div>
 <p>We run this more or less the same way as the other models:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">zero_boot &lt;-<span class="st"> </span><span class="kw">bootstrap_model</span>(<span class="dt">base_model =</span> fit_zipoisson,</a>
-<a class="sourceLine" id="cb16-2" title="2">                             <span class="dt">base_data =</span> owls,</a>
-<a class="sourceLine" id="cb16-3" title="3">                             <span class="dt">resamples =</span> <span class="dv">9999</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>zero_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(<span class="at">base_model =</span> fit_zipoisson,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">base_data =</span> owls,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">resamples =</span> <span class="dv">9999</span>)</span></code></pre></div>
 <p>In this case the output would be a list with two entries, one matrix in <code>zero_boot$cond</code>, the typical <code>conditional</code> model, and another matrix (in this case a single row, because <code>ziformula = ~1</code>) in <code>zero_cond$zi</code>, each giving the same shape output as we’ve seen above.</p>
 <p>In this particular model, the bootstrap model is quite conservative. Assumptions are often useful!</p>
 <!---
@@ -551,7 +390,7 @@ plot(1:10)
 plot(10:1)
 ```
 
-![](quick_use_files/figure-html/unnamed-chunk-17-1.png)![](quick_use_files/figure-html/unnamed-chunk-17-2.png)
+![](/private/var/folders/1f/c24gdg813tzf27lwt75czj5m0000gn/T/Rtmp0awHIa/Rbuilddb90367254ba/glmmboot/vignettes/quick_use_files/figure-html/unnamed-chunk-17-1.png)![](/private/var/folders/1f/c24gdg813tzf27lwt75czj5m0000gn/T/Rtmp0awHIa/Rbuilddb90367254ba/glmmboot/vignettes/quick_use_files/figure-html/unnamed-chunk-17-2.png)
 
 You can enable figure captions by `fig_caption: yes` in YAML:
 
@@ -566,18 +405,18 @@ Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr*
 You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
 
 
-                      mpg   cyl    disp    hp   drat      wt    qsec   vs   am   gear   carb
-------------------  -----  ----  ------  ----  -----  ------  ------  ---  ---  -----  -----
-Mazda RX4            21.0     6   160.0   110   3.90   2.620   16.46    0    1      4      4
-Mazda RX4 Wag        21.0     6   160.0   110   3.90   2.875   17.02    0    1      4      4
-Datsun 710           22.8     4   108.0    93   3.85   2.320   18.61    1    1      4      1
-Hornet 4 Drive       21.4     6   258.0   110   3.08   3.215   19.44    1    0      3      1
-Hornet Sportabout    18.7     8   360.0   175   3.15   3.440   17.02    0    0      3      2
-Valiant              18.1     6   225.0   105   2.76   3.460   20.22    1    0      3      1
-Duster 360           14.3     8   360.0   245   3.21   3.570   15.84    0    0      3      4
-Merc 240D            24.4     4   146.7    62   3.69   3.190   20.00    1    0      4      2
-Merc 230             22.8     4   140.8    95   3.92   3.150   22.90    1    0      4      2
-Merc 280             19.2     6   167.6   123   3.92   3.440   18.30    1    0      4      4
+|                  |  mpg| cyl|  disp|  hp| drat|    wt|  qsec| vs| am| gear| carb|
+|:-----------------|----:|---:|-----:|---:|----:|-----:|-----:|--:|--:|----:|----:|
+|Mazda RX4         | 21.0|   6| 160.0| 110| 3.90| 2.620| 16.46|  0|  1|    4|    4|
+|Mazda RX4 Wag     | 21.0|   6| 160.0| 110| 3.90| 2.875| 17.02|  0|  1|    4|    4|
+|Datsun 710        | 22.8|   4| 108.0|  93| 3.85| 2.320| 18.61|  1|  1|    4|    1|
+|Hornet 4 Drive    | 21.4|   6| 258.0| 110| 3.08| 3.215| 19.44|  1|  0|    3|    1|
+|Hornet Sportabout | 18.7|   8| 360.0| 175| 3.15| 3.440| 17.02|  0|  0|    3|    2|
+|Valiant           | 18.1|   6| 225.0| 105| 2.76| 3.460| 20.22|  1|  0|    3|    1|
+|Duster 360        | 14.3|   8| 360.0| 245| 3.21| 3.570| 15.84|  0|  0|    3|    4|
+|Merc 240D         | 24.4|   4| 146.7|  62| 3.69| 3.190| 20.00|  1|  0|    4|    2|
+|Merc 230          | 22.8|   4| 140.8|  95| 3.92| 3.150| 22.90|  1|  0|    4|    2|
+|Merc 280          | 19.2|   6| 167.6| 123| 3.92| 3.440| 18.30|  1|  0|    4|    4|
 
 Also a quote using `>`:
 

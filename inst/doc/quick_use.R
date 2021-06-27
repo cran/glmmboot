@@ -15,7 +15,8 @@ data(test_data)
 
 head(test_data)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ---- eval = requireNamespace("glmmTMB", quietly = TRUE), cache=TRUE----------
+## we'll skip this if glmmTMB not available
 library(glmmTMB)
 model_formula <- as.formula(y ~ x_var1 + x_var2 + x_var2 + (1 | subj))
 
@@ -23,15 +24,15 @@ base_run <- glmmTMB(formula = model_formula,
                     data = test_data,
                     family = binomial)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ---- eval = requireNamespace("glmmTMB", quietly = TRUE), cache=TRUE----------
 bootstrap_over_subj <- bootstrap_model(base_model = base_run,
                                        base_data = test_data,
                                        resamples = 99)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ---- eval = requireNamespace("glmmTMB", quietly = TRUE), cache=TRUE----------
 print(bootstrap_over_subj)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ---- eval = requireNamespace("glmmTMB", quietly = TRUE), cache=TRUE----------
 b_list1 <- bootstrap_model(base_model = base_run,
                            base_data = test_data,
                            resamples = 29,
@@ -45,13 +46,13 @@ b_list3 <- bootstrap_model(base_model = base_run,
                            resamples = 30,
                            return_coefs_instead = TRUE)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ---- eval = requireNamespace("glmmTMB", quietly = TRUE), cache=TRUE----------
 print(combine_resampled_lists(b_list1, b_list2, b_list3))
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ---- eval = requireNamespace("glmmTMB", quietly = TRUE), cache=TRUE----------
 list_of_lists_output <- list(b_list1, b_list2, b_list3)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ---- eval = requireNamespace("glmmTMB", quietly = TRUE), cache=TRUE----------
 print(combine_resampled_lists(list_of_lists_output))
 
 ## ---- eval=FALSE--------------------------------------------------------------

@@ -1,7 +1,7 @@
 Package: glmmboot
 Type: Package
 Title: Bootstrap Resampling for Mixed Effects and Plain Models
-Version: 0.5.1
+Version: 0.6.0
 Authors@R: person("Colman", "Humphrey", email = "humphrc@tcd.ie",
   role = c("aut", "cre"))
 Description: Performs bootstrap resampling for most models that update() works for. There
@@ -16,13 +16,13 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.1)
 Imports: methods, stats
-Suggests: glmmTMB (>= 0.2.1), testthat (>= 0.11.0), parallel (>=
+Suggests: glmmTMB (>= 1.1.0), testthat (>= 0.11.0), parallel (>=
         3.0.0), future.apply (>= 1.1.0), knitr, rmarkdown, covr
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-03-29 19:42:18 UTC; colmanhumphrey
+Packaged: 2021-06-27 19:07:48 UTC; colmanhumphrey
 Author: Colman Humphrey [aut, cre]
 Maintainer: Colman Humphrey <humphrc@tcd.ie>
 Repository: CRAN
-Date/Publication: 2020-03-30 08:50:02 UTC
+Date/Publication: 2021-06-27 19:30:08 UTC
